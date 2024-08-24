@@ -45,13 +45,11 @@ function App() {
     const element = document.getElementById(id);
 
     if (element) {
-      const itemId = id.replace("div-", "");
-
-      const item = items.find((item) => item.id === itemId);
+      const item = items.find((item) => item.id === id);
 
       if (item) {
         setDropZoneItems((prevItems) => [...prevItems, item]);
-        setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+        setItems((prevItems) => prevItems.filter((item) => item.id !== id));
       }
     }
   }
@@ -77,9 +75,9 @@ function App() {
       {items.map((item) => (
         <div
           key={item.id}
-          id={`div-${item.id}`}
+          id={item.id}
           draggable
-          onDragStart={(e) => handleDragStart(e, `div-${item.id}`)}
+          onDragStart={(e) => handleDragStart(e, item.id)}
           onDragEnd={handleDragEnd}
           className="draggable-div"
           style={{
